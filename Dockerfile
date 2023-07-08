@@ -1,4 +1,4 @@
-FROM debian:10 as builder
+FROM debian:12 as builder
 
 MAINTAINER PacketShepard
 
@@ -6,7 +6,7 @@ RUN mkdir /beammp
 
 WORKDIR /beammp
 
-RUN printf "deb http://deb.debian.org/debian buster-backports main\n" > /etc/apt/sources.list.d/buster-backports.list && \
+RUN printf "deb http://deb.debian.org/debian bookworm-backports main\n" > /etc/apt/sources.list.d/bookworm-backports.list && \
     apt-get update && apt-get install -y --no-install-recommends \
     make \
     cmake \
@@ -15,32 +15,32 @@ RUN printf "deb http://deb.debian.org/debian buster-backports main\n" > /etc/apt
     libz-dev \
     rapidjson-dev \
     libcurl4-openssl-dev \
-    libboost1.71-all-dev \
+    libboost1.74-all-dev \
     libssl-dev \
     git \
     curl \
     ca-certificates
 
-RUN git clone --depth 1 -b v2.0.3 --recurse-submodules --shallow-submodules https://github.com/BeamMP/BeamMP-Server.git BeamMP-Server
+RUN git clone --depth 1 -b v3.1.1 --recurse-submodules --shallow-submodules https://github.com/BeamMP/BeamMP-Server.git BeamMP-Server
 
 WORKDIR /beammp/BeamMP-Server
 
 RUN cmake . && make
 
-FROM debian:10
+FROM debian:12
 
 RUN mkdir /beammp
 
 WORKDIR /beammp
 
 
-RUN printf "deb http://deb.debian.org/debian buster-backports main\n" > /etc/apt/sources.list.d/buster-backports.list && \
+RUN printf "deb http://deb.debian.org/debian bookworm-backports main\n" > /etc/apt/sources.list.d/bookworm-backports.list && \
     apt-get update && apt-get install -y --no-install-recommends \
     liblua5.3 \
     libz-dev \
     rapidjson-dev \
-    libboost-system1.71.0 \
-    libboost-thread1.71.0 \
+    libboost-system1.74.0 \
+    libboost-thread1.74.0 \
     libcurl4-openssl-dev && \
     apt-get clean
 
