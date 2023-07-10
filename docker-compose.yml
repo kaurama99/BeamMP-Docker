@@ -1,7 +1,7 @@
 version: "3"
 services:
   beammp:
-    image: "vagahbond/beammp"
+    image: "vagahbond/beammp_server"
     container_name: beammp
     ports:
       - "30814:30814/udp"
