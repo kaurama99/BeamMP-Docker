@@ -1,6 +1,7 @@
 #!/bin/sh
 
-cat <<EOF >Server.cfg
+cat <<EOF >ServerConfig.toml
+[General]
 # This is the BeamMP Server Configuration File v0.60
 Debug = ${Debug} # true or false to enable debug console output
 Private = ${Private} # Private?

@@ -9,8 +9,8 @@ services:
     networks:
       - beammp_net
     volumes:
-      - ./Resources:/beammp/Resources:ro
-      - ./Server.log:/beammp/Server.log
+      - ./Resources:/beammp/Resources
+      # - ./Server.log:/beammp/Server.log
     environment:
       - PGID
       - PUID
@@ -25,7 +25,7 @@ services:
       - Desc
       - use
       - AuthKey
-    restart: unless-stopped
+        #   restart: unless-stopped
 
 networks:
   beammp_net:

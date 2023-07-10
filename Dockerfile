@@ -6,7 +6,7 @@ RUN mkdir /beammp
 
 WORKDIR /beammp
 
-RUN printf "deb http://deb.debian.org/debian bookworm-backports main\n" > /etc/apt/sources.list.d/bookworm-backports.list && \
+RUN printf "deb http://deb.debian.org/debian bullseye-backports main\n" > /etc/apt/sources.list.d/bullseye-backports.list && \
     apt-get update && apt-get install -y --no-install-recommends \
     make \
     cmake \
@@ -34,7 +34,7 @@ RUN mkdir /beammp
 WORKDIR /beammp
 
 
-RUN printf "deb http://deb.debian.org/debian bookworm-backports main\n" > /etc/apt/sources.list.d/bookworm-backports.list && \
+RUN printf "deb http://deb.debian.org/debian bullseye-backports main\n" > /etc/apt/sources.list.d/bullseye-backports.list && \
     apt-get update && apt-get install -y --no-install-recommends \
     liblua5.3 \
     libz-dev \
