@@ -11,7 +11,7 @@ Dockered BeamMP Server based on packetshepard's work, I just updated it.
 
 Basic setup is to replace YOUR_AUTHKEY with the AuthKey you get from BeamMP.
 
-`docker run --name beammp-server -p 30814:30814 -e AuthKey='YOUR_AUTHKEY' packetshepard/beammp`
+`docker run --name beammp-server -p 30814:30814 -e AuthKey='YOUR_AUTHKEY' vagahbond/beammp`
 
 Other way is running with docker-compose after cloning this repo:
 
