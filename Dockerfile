@@ -1,4 +1,4 @@
-FROM debian:12 as builder
+FROM debian:11 as builder
 
 MAINTAINER PacketShepard
 
@@ -27,7 +27,7 @@ WORKDIR /beammp/BeamMP-Server
 
 RUN cmake . && make
 
-FROM debian:12
+FROM debian:11
 
 RUN mkdir /beammp
 
