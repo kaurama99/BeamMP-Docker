@@ -1,6 +1,3 @@
-[hub]: https://hub.docker.com/r/vagahbond/beammp_server
-[git]: https://github.com/vagahbond/BeamMP-docker
-
 [![Docker Pulls](https://img.shields.io/docker/pulls/vagahbond/beammp_server.svg)][hub]
 
 # [BeamMP-Server in docker][hub]
@@ -23,7 +20,7 @@ docker compose up
 
 If you'd like to build yourself, run this from the root directory:
 
-`docker build -t vagahbond/beammp_server .`
+`docker build -t <your-registry>/beammp_server .`
 
 ## Parameters
 
@@ -44,8 +41,8 @@ If you'd like to build yourself, run this from the root directory:
 | `-e use`         | Which folder your mods are in. Best to leave it at default                                     | `Resources`                  |
 | `-e AuthKey`     | The authentication key used by the server. It is used to identify your server and is mandatory | `null`                       |
 
-see https://wiki.beamng-mp.com/en/home/server-installation for more info.
+see [BeamMP's doc](https://wiki.beamng-mp.com/en/home/server-installation) for more info.
 
-last update 2023/07/10
+last update 2023/12/29
 
 Enjoy !
