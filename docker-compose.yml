@@ -18,7 +18,7 @@ services:
       - Debug
       - Private
       - Port
-      - Cars
+      - MaxCars
       - MaxPlayers
       - Map
       - Name
