@@ -1,65 +1,40 @@
 FROM debian:11 as builder
 
-MAINTAINER PacketShepard
+MAINTAINER Vagahbond
+
+RUN printf "deb http://deb.debian.org/debian bullseye-backports main\n" > /etc/apt/sources.list.d/bullseye-backports.list && \
+    apt-get update && apt-get install -y --no-install-recommends \
+    git \
+    ca-certificates
 
 RUN mkdir /beammp
 
 WORKDIR /beammp
 
-RUN printf "deb http://deb.debian.org/debian bullseye-backports main\n" > /etc/apt/sources.list.d/bullseye-backports.list && \
-    apt-get update && apt-get install -y --no-install-recommends \
-    make \
-    cmake \
-    g++ \
-    liblua5.3 \
-    libz-dev \
-    rapidjson-dev \
-    libcurl4-openssl-dev \
-    libboost1.74-all-dev \
-    libssl-dev \
-    git \
-    curl \
-    ca-certificates
-
-RUN git clone --depth 1 -b v3.1.1 --recurse-submodules --shallow-submodules https://github.com/BeamMP/BeamMP-Server.git BeamMP-Server
+RUN git clone --depth 1 -b v3.2.1 --recurse-submodules --shallow-submodules https://github.com/BeamMP/BeamMP-Server.git BeamMP-Server
 
 WORKDIR /beammp/BeamMP-Server
 
-RUN cmake . && make
+RUN ./scripts/debian-11/1-install-deps.sh
 
+RUN ./scripts/debian-11/2-configure.sh
+
+RUN ./scripts/debian-11/3-build.sh
+
+# Production server
 FROM debian:11
 
 RUN mkdir /beammp
 
 WORKDIR /beammp
 
+COPY --from=builder /beammp/BeamMP-Server/scripts/debian-11/4-install-runtime-deps.sh .
 
-RUN printf "deb http://deb.debian.org/debian bullseye-backports main\n" > /etc/apt/sources.list.d/bullseye-backports.list && \
-    apt-get update && apt-get install -y --no-install-recommends \
-    liblua5.3 \
-    libz-dev \
-    rapidjson-dev \
-    libboost-system1.74.0 \
-    libboost-thread1.74.0 \
-    libcurl4-openssl-dev && \
-    apt-get clean
+RUN ./4-install-runtime-deps.sh
 
-COPY --from=builder /beammp/BeamMP-Server/BeamMP-Server .
+COPY --from=builder /beammp/BeamMP-Server/bin/BeamMP-Server .
 
 COPY entrypoint.sh .
-
-ENV \
-     TZ="America/New_York" \
-     Debug="false" \
-     Private="true" \
-     Port="30814" \
-     Cars="1" \
-     MaxPlayers="10" \
-     Map="/levels/gridmap/info.json" \
-     Name="BeamMP New Server" \
-     Desc="BeamMP Default Description" \
-     use="Resources" \
-     AuthKey=""
 
 EXPOSE 30814
 ENTRYPOINT ["./entrypoint.sh" ]
