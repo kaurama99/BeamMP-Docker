@@ -25,6 +25,7 @@ services:
       - Desc
       - use
       - AuthKey
+      - Description
         #   restart: unless-stopped
 
 networks:
