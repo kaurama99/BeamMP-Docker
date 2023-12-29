@@ -4,8 +4,8 @@ services:
     image: "vagahbond/beammp_server"
     container_name: beammp
     ports:
-      - "30814:30814/udp"
-      - "30814:30814/tcp"
+      - "31853:30814/udp"
+      - "31853:30814/tcp"
     networks:
       - beammp_net
     volumes:
