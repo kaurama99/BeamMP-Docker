@@ -1,6 +1,6 @@
 FROM debian:11 as builder
 
-MAINTAINER Vagahbond
+MAINTAINER Kauram99
 
 RUN printf "deb http://deb.debian.org/debian bullseye-backports main\n" > /etc/apt/sources.list.d/bullseye-backports.list && \
     apt-get update && apt-get install -y --no-install-recommends \
@@ -11,7 +11,7 @@ RUN mkdir /beammp
 
 WORKDIR /beammp
 
-RUN git clone --depth 1 -b v3.2.1 --recurse-submodules --shallow-submodules https://github.com/BeamMP/BeamMP-Server.git BeamMP-Server
+RUN git clone --depth 1 -b v3.4.1 --recurse-submodules --shallow-submodules https://github.com/BeamMP/BeamMP-Server.git BeamMP-Server
 
 WORKDIR /beammp/BeamMP-Server
 
