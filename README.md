@@ -1,4 +1,4 @@
-[![Docker Pulls](https://img.shields.io/docker/pulls/vagahbond/beammp_server.svg)][hub]
+
 
 # [BeamMP-Server in docker][hub]
 
